@@ -1,0 +1,112 @@
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 320px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card-body h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.card-rating {
+  color: #f59e0b;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.card-price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px;
+}
+
+.card-content {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.card-details {
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-details {
+  background: #e5e7eb;
+  color: #333;
+}
+
+.btn-details:hover {
+  background: #d1d5db;
+}
+
+.btn-cart {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-cart:hover {
+  background: #1d4ed8;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #111;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  animation: slideIn 0.3s ease;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  flex-wrap: wrap;
+}   
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}   
