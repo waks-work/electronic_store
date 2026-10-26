@@ -1,10 +1,10 @@
 declare global {
   namespace JSX {
-    type Element = HTMLElement;
+    type Element = HTMLElement | DocumentFragment;
     interface IntrinsicElements {
       [elemName: string]: any;
     }
   }
 }
 
-export {};   
+export {};
