@@ -81,7 +81,7 @@ export function Detail({ product }: DetailProps): HTMLElement {
 
             {/* Middle: Details & Specifications */}
             <div class="pdp-section">
-                <h2>l_product Details</h2>
+                <h2>Product Details</h2>
                 <p>{product.details}</p>
             </div>
 

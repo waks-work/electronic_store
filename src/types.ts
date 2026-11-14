@@ -38,16 +38,26 @@ export function match_option<T, R>(
     return opt.tag === "Some" ? handlers.some(opt.value) : handlers.none();
 }
 
-
 export enum l_page_view {
-    Home = "HOME",
-    PDP  = "PDP"
+    Home     = "HOME",
+    PDP      = "PDP",
+    Wishlist = "WISHLIST",
+    History  = "HISTORY",
+    Profile  = "PROFILE",
+    Auth     = "AUTH",
 }
 
 export enum l_stock_status {
     in_stock     = "IN_STOCK",
     low_stock    = "LOW_STOCK",
     out_of_stock = "OUT_OF_STOCK"
+}
+
+
+export interface User {
+    readonly id: string;
+    readonly email: string;
+    readonly name: string;
 }
 
 export enum l_theme {
@@ -83,3 +93,15 @@ export interface l_cart_item {
   readonly product: l_product;
   readonly quantity: number;
 }
+
+export interface UserData {
+    readonly cart: readonly l_cart_item[];
+    readonly wishlist: readonly string[];
+    readonly recentlyViewed: readonly l_product[];
+}
+
+export const defaultUserData = (): UserData => ({
+    cart: [],
+    wishlist: [],
+    recentlyViewed: []
+});
