@@ -1,4 +1,4 @@
-import { l_product, l_cart_item, l_page_view, l_theme, Option, Some, None, User, UserData, defaultUserData } from "./types";
+import { l_product, l_cart_item, l_page_view, l_theme, Option, Some, None, User, UserData, defaultUserData, Order } from "./types";
 
 type listener = () => void;
 
@@ -45,10 +45,13 @@ interface AppState {
     isUserMenuOpen: boolean;
     currentUser: Option<User>;
     theme: l_theme;
+    orders: readonly Order[];
+    lastOrder: Option<Order>;
 }
 
 const initialUser = loadSavedUser();
 const initialData = initialUser.tag === "Some" ? loadUserData(initialUser.value.id) : loadUserData("guest");
+
 
 const state: AppState = {
     currentView: l_page_view.Home,
@@ -62,7 +65,9 @@ const state: AppState = {
     isAuthOpen: false,
     isUserMenuOpen: false,
     currentUser: initialUser,
-    theme: (localStorage.getItem("theme") as l_theme) || l_theme.light
+    theme: (localStorage.getItem("theme") as l_theme) || l_theme.light,
+    orders: initialData.orders || [],
+    lastOrder: None(),
 };
 
 const listeners: Set<listener> = new Set();
@@ -82,7 +87,8 @@ function notify() {
     saveUserData(activeId, {
         cart: state.cart,
         wishlist: state.wishlist,
-        recentlyViewed: state.recentlyViewed
+        recentlyViewed: state.recentlyViewed,
+        orders: state.orders,
     });
     listeners.forEach((fn) => fn());
 }
@@ -233,6 +239,20 @@ export const actions = {
     open_profile() {
         state.currentView = l_page_view.Profile;
         state.isUserMenuOpen = false;
+        notify();
+    },
+ 
+    open_checkout() {
+        state.isCartOpen = false;
+        state.lastOrder = None();
+        state.currentView = l_page_view.Checkout;
+        notify();
+    },
+    
+    complete_checkout(order: Order) {
+        state.orders = [order, ...state.orders];
+        state.lastOrder = Some(order);
+        state.cart = [];
         notify();
     }
 };

@@ -45,6 +45,22 @@ export enum l_page_view {
     History  = "HISTORY",
     Profile  = "PROFILE",
     Auth     = "AUTH",
+    Checkout = "CHECKOUT",
+}
+
+export interface Order {
+    readonly id: string;
+    readonly customerName: string;
+    readonly shippingAddress: string;
+    readonly paymentMethod: string;
+    readonly totalAmount: number;
+    readonly createdAt: string;
+    readonly items: readonly {
+        readonly id: string;
+        readonly title: string;
+        readonly price: number;
+        readonly quantity: number;
+    }[];
 }
 
 export enum l_stock_status {
@@ -98,10 +114,12 @@ export interface UserData {
     readonly cart: readonly l_cart_item[];
     readonly wishlist: readonly string[];
     readonly recentlyViewed: readonly l_product[];
+    readonly orders: readonly Order[];
 }
 
 export const defaultUserData = (): UserData => ({
     cart: [],
     wishlist: [],
-    recentlyViewed: []
+    recentlyViewed: [],
+    orders:[],
 });

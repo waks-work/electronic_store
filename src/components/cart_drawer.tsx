@@ -47,7 +47,7 @@ export function CartDrawer(): HTMLElement {
                     <button
                         class="btn btn-primary btn-full"
                         disabled={state.cart.length === 0}
-                        onclick={() => alert("Proceeding to checkout!")}
+                        onclick={() => actions.open_checkout()}
                     > Checkout Now </button>
                 </div>
             </div>

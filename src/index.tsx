@@ -11,6 +11,7 @@ import { fetchl_products } from "./api";
 import { PRODUCTS, set_products } from "./data";
 import { l_page_view, match_option } from "./types";
 import "./style.css";
+import { CheckoutView } from "./components/checkout";
 
 let headerEl: HTMLElement | null = null;
 let mainEl: HTMLElement | null = null;
@@ -50,6 +51,8 @@ function MainContent(): HTMLElement {
                     some: (prod) => <Detail product={prod} />,
                     none: () => <div>No product selected.</div>
                 });
+            case l_page_view.Checkout:
+                return <CheckoutView />
             case l_page_view.Home:
             default:
                 return (

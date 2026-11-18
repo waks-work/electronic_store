@@ -27,6 +27,26 @@ CREATE TABLE IF NOT EXISTS users (
     name TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS orders (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    customer_name TEXT NOT NULL,
+    shipping_address TEXT NOT NULL,
+    payment_method TEXT NOT NULL,
+    total_amount REAL NOT NULL,
+    created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    order_id TEXT NOT NULL,
+    product_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    price REAL NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
+
 -- Seed 80 Products
 INSERT OR IGNORE INTO products (id, title, description, price, rating, image, stock_count, shipping_cost, details, category, promotion_tag) VALUES 
 ('p1', 'Wireless ANC Headphones', 'Active noise cancellation with high-fidelity acoustics.', 149.99, 5, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60', 4, 5.0, 'Premium over-ear wireless headphones with custom dynamic drivers.', 'Audio', 'SAVE 20%'),
@@ -141,3 +161,4 @@ INSERT OR IGNORE INTO product_specifications (product_id, spec_key, spec_value) 
 -- Seed User
 INSERT OR IGNORE INTO users (id, email, password_hash, name)
 VALUES ('u1', 'demo@electronicstore.com', '$2y$10$eImiTXuWVxfM37uY4JANjOL.sB4V3o0zN.G9jB3yK31fP0H1L5mG6', 'Demo User');
+
